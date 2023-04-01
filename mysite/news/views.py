@@ -13,7 +13,8 @@ from .models import News
 #     return HttpResponse(res)
 
 def index(request):
-    news = News.objects.order_by('-created_at')
+    # news = News.objects.order_by('-created_at')   # теперь сортировка прописана в моделях
+    news = News.objects.all()
     context = {
         'news': news,
         'title': 'Список новостей'
