@@ -26,22 +26,37 @@
 
   <div class="container mt-3">
     <h1>{{ title }}</h1>
+    {% now "d M Y | H:m" %}
+    <p>Количество новостей - {{ news.count }}</p>
     <div class="row">
       <div class="col-md-12">
-        {% for item in news %}
+        {% for item in news reversed %}
         <div class="card mb-3">
           <div class="card-header">
+<!--            {{ item.my_func }} обращаемся в методу модели-->
+            {{ forloop.counter }}
             Категория: {{ item.category.title }}
           </div>
           <div class="card-body">
-            <h5 class="card-title">{{ item.title }}</h5>
-            <p class="card-text">{{ item.content }}</p>
-            <a href="#" class="btn btn-primary">Read more...</a>
+              <div class="media">
+                  {% if item.photo %}
+                    <img src="{{ item.photo.url }}" alt="" width="350" class="mr-3">
+                  {% else %}
+                  <img src="https://cdn.shopify.com/s/files/1/0563/5057/2740/collections/one_piece_logo.jpg?v=1632989513" alt="" width="350" class="mr-3">
+                  {% endif %}
+                  <div class="media-body"> 
+                    <h5 class="card-title {% cycle 'text-danger' 'text-success' %}">{{ item.title }}</h5>
+                    <p class="card-text">{{ item.content|safe|linebreaks|truncatewords:50 }}</p>
+                    <a href="#" class="btn btn-primary">Read more...</a>
+                  </div>
+              </div>
           </div>
           <div class="card-footer text-muted">
-            {{ item.created_at|date:"Y-m-d H:m:s" }}
+            {{ item.created_at|timesince }}
           </div>
         </div>
+        {% empty %}
+          Oops...
         {% endfor %}
       </div>
     </div>
