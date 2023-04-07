@@ -23,3 +23,4 @@ class NewsForm(forms.ModelForm):
         if re.match(r'\d', title):
             raise ValidationError('Название не должно начинваться с цифры')
         return title
+
