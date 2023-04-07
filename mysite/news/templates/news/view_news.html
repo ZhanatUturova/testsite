@@ -14,17 +14,13 @@
         Категория: <a href="{{ news_item.category.get_absolute_url }}">{{ news_item.category.title }}</a>
       </div>
       <div class="card-body">
-          <div class="media">
-              {% if news_item.photo %}
-                <img src="{{ news_item.photo.url }}" alt="" width="350" class="mr-3">
-              {% else %}
-              <img src="https://cdn.shopify.com/s/files/1/0563/5057/2740/collections/one_piece_logo.jpg?v=1632989513" alt="" width="350" class="mr-3">
-              {% endif %}
-              <div class="media-body">
-                <h5 class="card-title {% cycle 'text-danger' 'text-success' %}">{{ news_item.title }}</h5>
-                <p class="card-text">{{ news_item.content|safe|linebreaks }}</p>
-              </div>
-          </div>
+          {% if news_item.photo %}
+            <img src="{{ news_item.photo.url }}" alt="" width="350" class="float-left mr-3">
+          {% else %}
+          <img src="https://cdn.shopify.com/s/files/1/0563/5057/2740/collections/one_piece_logo.jpg?v=1632989513" alt="" width="350" class="float-left mr-3">
+          {% endif %}
+        <h5 class="card-title {% cycle 'text-danger' 'text-success' %}">{{ news_item.title }}</h5>
+        <p class="card-text">{{ news_item.content|safe|linebreaks }}</p>
       </div>
       <div class="card-footer text-muted">
         {{ news_item.created_at|timesince }}
