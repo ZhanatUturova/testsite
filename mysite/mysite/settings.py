@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'ckeditor',
     'ckeditor_uploader',
+    'captcha',
     'debug_toolbar',
     'news.apps.NewsConfig',
 ]
@@ -209,3 +210,9 @@ CKEDITOR_CONFIGS = {
         ]),
     }
 }
+
+
+CAPTCHA_FONT_SIZE = 40
+CAPTCHA_LETTER_ROTATION = (-25,25)
+CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge'
+CAPTCHA_NOISE_FUNCTIONS = None
